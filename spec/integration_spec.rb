@@ -91,4 +91,19 @@ describe 'CLI' do
     result.should include('333')
     result.should_not include('222')
   end
+
+  describe "bin/parallel_spec" do
+    it "can run with test options" do
+      write "x1_spec.rb", "puts '111'"
+      results = %x(cd #{folder} && #{bin_folder}/parallel_spec -o '-p progress' 2>&1 && echo 'i ran!')
+      results.should include("Results")
+    end
+
+    it "can run with test options" do
+      write "x1_spec.rb", "puts '111'"
+      results = %x(cd #{folder} && #{bin_folder}/parallel_test -t spec -o '-p progress' 2>&1 && echo 'i ran!')
+      results.should include("Results")
+    end
+  end
+
 end
